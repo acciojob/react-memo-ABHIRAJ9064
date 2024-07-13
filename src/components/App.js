@@ -1,29 +1,41 @@
+import React, { useState } from "react";
 
-import React,{useState} from 'react'
-import Todos from './Todos'
-import Memo from './Memo'
-import Count from './Count'
-import { useEffect } from 'react'
+const App = ()=>{
+    const [newTodo,setNewTodo] = useState('');
+    const [count,setCount] = useState(1000000000);
+    const [input,setInput] = useState('');
+    const [todo,setTodo] = useState([]);
 
-let App = () =>{
-    useEffect(()=>{
-
-    },[count,memo,todos])
-    let [todos,Settodos]=useState(['New Todo'])
-    let [memo,Setmemo]=useState(['HTMLL',"CSSS3"])
-    let [count,Setcount]=useState(1000000000)
+    console.log(todo);
     return(
-        <div id='main'>
-        <h1>React.useMEMo</h1>
-        <Todos set={Settodos} arr={todos} />
-        <Count set={Setcount} number={count}/>
-        <h1>Expensive Calculation</h1>
-        {/* <div id='calc'>1000000000</div> */}
-        <Memo set={Setmemo} arr={memo} />
+        <div id="main">
+           <h1>My todos</h1>
+           <p id="todo-0">{newTodo}</p>
+           <button id="add-todo-btn" onClick={()=>(
+            setNewTodo('New Todo')
+           )}>Add Todo</button>
+
+           <div id="incr-cnt">
+            Count : 0<button id="incr-btn" onClick={()=>(setCount(count+1))}>New Todo</button>
+            <div id="calc">{count}</div>
+           </div>
+           
+
+           <h1>React.memo</h1>
+           <input id="skill-input" type="text" placeholder="todo task "  onChange={(e)=>(setInput(e.target.value))}/>
+           <button id="skill-btn" onClick={()=>(
+            setTodo([...todo,input])
+           )}>
+            Add Skill</button>
+            <ul id="item-jumbotron">
+            {todo && (todo.map((task)=>(
+                <li>{task}</li>
+            )))
+            }
+            </ul>
         </div>
     )
-   
-        
 }
 
-export default App
+
+export default App;
